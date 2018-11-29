@@ -263,7 +263,7 @@ int controller_loadFromText(char* path , LinkedList* pListadoAlumnos)
     FILE* pArchivoTexto;
     int indice = 0;
 
-    if ((pArchivoTexto = fopen(path, "r")) != NULL)
+    if ((pArchivoTexto = fopen("MOCK_DATA.csv", "r")) != NULL)
     {
         indice = parserFromText(pArchivoTexto, pListadoAlumnos);
     }
@@ -273,27 +273,49 @@ int controller_loadFromText(char* path , LinkedList* pListadoAlumnos)
     return indice;
 }
 
+int controller_saveAsText(char* path , LinkedList* pListadoAlumnos)
+{
+    eAlumno* pAlumno;
+    int indice = 0;
+    int i;
+
+    FILE* pArchivoTexto = fopen(path, "w");
+
+    if (pArchivoTexto == NULL)
+    {
+        printf("No se pudo abrir el archivo");
+        return indice;
+    }
+
+    fprintf(pArchivoTexto, "ID, Nombre, Nota1, Nota2, NotaFinal \n");
+
+    if(pListadoAlumnos != NULL)
+    {
+        for (i = 0; i < ll_len(pListadoAlumnos); i++)
+        {
+            pAlumno = (eAlumno*) ll_get(pListadoAlumnos, i);
+            fprintf(pArchivoTexto, "%d, %s, %.2f, %.2f %.2f\n", pAlumno->id, pAlumno->nombre, pAlumno->nota1, pAlumno->nota2, pAlumno->notaFinal);
+        }
+        printf("El archivo se guardo exitosamente");
+        indice = 1;
+    }
+    fclose(pArchivoTexto);
+    return indice;
+}
 /// LISTAR ///
 
-int listarAlumnos(LinkedList* this, eAlumno* alumno)
+int listarAlumnos (LinkedList* this)
 {
     eAlumno* alumnoAuxiliar;
     int i;
-    int* id;
+    int id;
     char nombre[100];
-    float* nota1;
-    float* nota2;
-    float* notaFinal;
+    float nota1;
+    float nota2;
+    float notaFinal;
     int indice = -1;
 
-
-    getIdAlumno(alumno,&id);
-    getNombreAlumno(alumno,nombre);
-    getNota1(alumno,&nota1);
-    getNota2(alumno,&nota2);
-    getNotaFinal(alumno,&notaFinal);
-
-    printf("ID---Nombre---Nota1--Nota2-- Nota Final\n");
+    printf("ID---Nombre---Nota1--Nota2-- NotaFinal\n");
 
     for(i = 0; i < ll_len(this); i++)
     {
@@ -301,9 +323,20 @@ int listarAlumnos(LinkedList* this, eAlumno* alumno)
 
         if(alumnoAuxiliar != NULL)
         {
-            printf("%d---%s---%f--%f--%f\n", id, nombre, nota1 ,nota2 ,notaFinal);
+            printf("%d---%s---%.2f--%.2f--%.2f \n", alumnoAuxiliar->id, alumnoAuxiliar->nombre, alumnoAuxiliar->nota1, alumnoAuxiliar->nota2, alumnoAuxiliar->notaFinal);
             indice = 1;
         }
     }
     return indice;
+}
+
+/// PROMEDIO ///
+
+float promedio (float nota1, float nota2)
+{
+    float notaFinal;
+
+    notaFinal = (nota1 + nota2) / 2;
+
+    return notaFinal;
 }

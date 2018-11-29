@@ -82,6 +82,9 @@ int controller_saveAsText(char*, LinkedList*);
 
 /// LISTAR ///
 
-int listarAlumnos(LinkedList*, eAlumno*);
+int listarAlumnos (LinkedList* this);
 
 
+/// PROMEDIO ///
+
+float promedio (float, float);

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <conio.h>
 #include "LinkedList.h"
 #include "Alumno.h"
 
@@ -10,19 +11,18 @@ int main()
     int control;
 
     LinkedList* listadoAlumnos = ll_newLinkedList();
+    srand() % 11;
 
     do
     {
         printf("***********************************************************************\n");
-        printf("1- Cargar alumnos\n");
-        printf("2- \n");
-        printf("3- \n");
-        printf("4- \n");
+        printf("1- Cargar alumnos \n");
+        printf("2- Listar alumnos \n");
+        printf("4- Guardar datos \n");
         printf("5- \n");
         printf("***********************************************************************\n");
         printf("Seleccione una opcion: ");
         scanf("%d", &opcion);
-
 
         switch (opcion)
         {
@@ -36,6 +36,14 @@ int main()
                 {
                     printf("No se pudo abrir el archivo\n");
                 }
+                break;
+            case 2:
+                ordenarPorNombre(listadoAlumnos);
+
+                listarAlumnos(listadoAlumnos);
+                break;
+            case 4:
+                controller_saveAsText("Final.csv", listadoAlumnos);
                 break;
             case 10:
                 printf("Gracias por utilizar el programa");

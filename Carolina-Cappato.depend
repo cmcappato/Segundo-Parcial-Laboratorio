@@ -1,26 +1,27 @@
 # depslib dependency file v1.0
+1543506041 source:d:\cappato\carolina-cappato\alumno.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Alumno.h"
+	"LinkedList.h"
+
+1543505927 d:\cappato\carolina-cappato\alumno.h
+	"LinkedList.h"
+
+1543493077 d:\cappato\carolina-cappato\linkedlist.h
+
 1543493077 source:d:\cappato\carolina-cappato\linkedlist.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"LinkedList.h"
 
-1543493077 d:\cappato\carolina-cappato\linkedlist.h
-
-1543500721 source:d:\cappato\carolina-cappato\main.c
+1543504834 source:d:\cappato\carolina-cappato\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	<conio.h>
 	"LinkedList.h"
 	"Alumno.h"
-
-1543501505 d:\cappato\carolina-cappato\alumno.h
-	"LinkedList.h"
-
-1543499625 source:d:\cappato\carolina-cappato\alumno.c
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	"Alumno.h"
-	"LinkedList.h"
 
