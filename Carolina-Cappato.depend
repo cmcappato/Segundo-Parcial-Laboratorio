@@ -25,3 +25,29 @@
 	"LinkedList.h"
 	"Alumno.h"
 
+1544501797 source:c:\users\caro\desktop\fra\1° b\segundo parcial labo i\segundo-parcial-laboratorio-master\linkedlist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"LinkedList.h"
+
+1544501797 c:\users\caro\desktop\fra\1° b\segundo parcial labo i\segundo-parcial-laboratorio-master\linkedlist.h
+
+1544572736 source:c:\users\caro\desktop\fra\1° b\segundo parcial labo i\segundo-parcial-laboratorio-master\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<conio.h>
+	"LinkedList.h"
+	"Alumno.h"
+
+1544573162 c:\users\caro\desktop\fra\1° b\segundo parcial labo i\segundo-parcial-laboratorio-master\alumno.h
+	"LinkedList.h"
+
+1544571679 source:c:\users\caro\desktop\fra\1° b\segundo parcial labo i\segundo-parcial-laboratorio-master\alumno.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Alumno.h"
+	"LinkedList.h"
+

@@ -4,9 +4,9 @@ typedef struct
 {
     int id;
     char nombre [128];
-    float nota1;
-    float nota2;
-    float notaFinal;
+    int nota1;
+    int nota2;
+    int notaFinal;
 }eAlumno;
 
 /// ALUMNO ///
@@ -33,22 +33,26 @@ int setNombreAlumno (eAlumno*, char*);
 int getNombreAlumno (eAlumno*, char*);
 
 /// NOTA 1 ///
-int setNota1 (eAlumno*, float);
+int setNota1 (eAlumno*, int);
 
-int getNota1 (eAlumno*, float*);
+int getNota1 (eAlumno*, int*);
 
 /// NOTA 2 ///
 
-int setNota2 (eAlumno*, float);
+int setNota2 (eAlumno*, int);
 
-int getNota2 (eAlumno*, float*);
+int getNota2 (eAlumno*, int*);
 
 
 /// NOTA FINAL ///
 
-int setNotaFinal (eAlumno*, float);
+int setNotaFinal (eAlumno*, int);
 
-int getNotaFinal (eAlumno*, float*);
+int getNotaFinal (eAlumno*, int*);
+
+void calcularNotasAlumnos(LinkedList*);
+
+void calcularNotaFinal(eAlumno* elemento);
 
 /// ORDENAR ///
 
@@ -87,4 +91,4 @@ int listarAlumnos (LinkedList* this);
 
 /// PROMEDIO ///
 
-float promedio (float, float);
+int filtrarPromedio(void* elemento, int aux);

@@ -11,15 +11,15 @@ int main()
     int control;
 
     LinkedList* listadoAlumnos = ll_newLinkedList();
-    srand() % 11;
 
     do
     {
         printf("***********************************************************************\n");
         printf("1- Cargar alumnos \n");
         printf("2- Listar alumnos \n");
+        printf("3- Asignacion de notas \n");
         printf("4- Guardar datos \n");
-        printf("5- \n");
+        printf("5- Salir\n");
         printf("***********************************************************************\n");
         printf("Seleccione una opcion: ");
         scanf("%d", &opcion);
@@ -30,11 +30,11 @@ int main()
                 control = controller_loadFromText("data.csv", listadoAlumnos);
                 if (control)
                 {
-                    printf("Archivo cargado con exito\n");
+                    printf("Archivo cargado con exito \n");
                 }
                 else
                 {
-                    printf("No se pudo abrir el archivo\n");
+                    printf("No se pudo abrir el archivo \n");
                 }
                 break;
             case 2:
@@ -42,14 +42,17 @@ int main()
 
                 listarAlumnos(listadoAlumnos);
                 break;
+            case 3:
+                calcularNotasAlumnos(listadoAlumnos);
+                 break;
             case 4:
                 controller_saveAsText("Final.csv", listadoAlumnos);
                 break;
             case 10:
-                printf("Gracias por utilizar el programa");
+                printf("Gracias por utilizar el programa \n");
                 break;
             default:
-                printf("Ingrese una opcion del 1 al 5");
+                printf("Ingrese una opcion del 1 al 5 \n");
         }
         system("pause");
         system("cls");

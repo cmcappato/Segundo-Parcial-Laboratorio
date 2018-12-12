@@ -90,7 +90,7 @@ int getNombreAlumno (eAlumno* this, char* nombre)
 
 /// NOTA 1 ///
 
-int setNota1 (eAlumno* this, float nota1)
+int setNota1 (eAlumno* this, int nota1)
 {
     int indice = 0;
 
@@ -102,7 +102,7 @@ int setNota1 (eAlumno* this, float nota1)
     return indice;
 }
 
-int getNota1 (eAlumno* this, float* nota1)
+int getNota1 (eAlumno* this, int* nota1)
 {
     int indice = 0;
 
@@ -116,7 +116,7 @@ int getNota1 (eAlumno* this, float* nota1)
 
 /// NOTA 2 ///
 
-int setNota2 (eAlumno* this, float nota2)
+int setNota2 (eAlumno* this, int nota2)
 {
     int indice = 0;
 
@@ -128,7 +128,7 @@ int setNota2 (eAlumno* this, float nota2)
     return indice;
 }
 
-int getNota2 (eAlumno* this, float* nota2)
+int getNota2 (eAlumno* this, int* nota2)
 {
     int indice = 0;
 
@@ -141,19 +141,19 @@ int getNota2 (eAlumno* this, float* nota2)
 }
 /// NOTA FINAL ///
 
-int setNotaFinal (eAlumno* this, float notaFinal)
+int setNotaFinal (eAlumno* this,int numero)
 {
     int indice = 0;
 
     if(this != NULL)
     {
-        this -> notaFinal = notaFinal;
+        this -> notaFinal = numero;
     }
 
     return indice;
 }
 
-int getNotaFinal (eAlumno* this, float* notaFinal)
+int getNotaFinal (eAlumno* this, int* notaFinal)
 {
     int indice = 0;
 
@@ -164,6 +164,7 @@ int getNotaFinal (eAlumno* this, float* notaFinal)
     }
     return indice;
 }
+
 /// ORDENAR ///
 
 int compararAlumnos (void* eAlumnoA, void* eAlumnoB)
@@ -175,32 +176,22 @@ int compararAlumnos (void* eAlumnoA, void* eAlumnoB)
     getNombreAlumno((eAlumno*) eAlumnoA, alumnoA);
     getNombreAlumno((eAlumno*) eAlumnoB, alumnoB);
 
-    if(strcmp(alumnoA, alumnoB) > 0)
+    if(alumnoA !=NULL && alumnoB !=NULL)
     {
-        indice = 1;
+        indice = strcmp(alumnoA, alumnoB);
     }
 
-    return indice;
+     return indice;
 }
 
 int ordenarPorNombre (LinkedList* this)
 {
-    eAlumno* alumnoAuxiliar;
     int indice = 0;
-    int i;
 
     if(this != NULL)
     {
-        for (i = 0; i < ll_len(this); i++)
-        {
-            alumnoAuxiliar = (eAlumno*) ll_get(this, i);
-
-            if (alumnoAuxiliar != NULL)
-            {
-                ll_sort(this, compararAlumnos, 1);
-                indice = 1;
-            }
-        }
+        ll_sort(this, compararAlumnos, 1);
+        indice = 1;
     }
     return indice;
 }
@@ -229,9 +220,9 @@ int parserFromText(FILE* pFile , LinkedList* pListadoAlumnos)
                 pAlumno = nuevoAlumno();
                 setIdAlumno(pAlumno, atoi(id));
                 setNombreAlumno(pAlumno, nombre);
-                setNota1(pAlumno, atof(nota1));
-                setNota2(pAlumno, atof(nota2));
-                setNotaFinal(pAlumno, atof(notaFinal));
+                setNota1(pAlumno, atoi(nota1));
+                setNota2(pAlumno, atoi(nota2));
+                setNotaFinal(pAlumno, atoi(notaFinal));
 
                 if(pAlumno != NULL)
                 {
@@ -249,8 +240,6 @@ int parserFromText(FILE* pFile , LinkedList* pListadoAlumnos)
             {
                 break;
             }
-
-
         }while(!feof(pFile));
     }
     return indice;
@@ -283,7 +272,7 @@ int controller_saveAsText(char* path , LinkedList* pListadoAlumnos)
 
     if (pArchivoTexto == NULL)
     {
-        printf("No se pudo abrir el archivo");
+        printf("No se pudo abrir el archivo \n");
         return indice;
     }
 
@@ -294,9 +283,9 @@ int controller_saveAsText(char* path , LinkedList* pListadoAlumnos)
         for (i = 0; i < ll_len(pListadoAlumnos); i++)
         {
             pAlumno = (eAlumno*) ll_get(pListadoAlumnos, i);
-            fprintf(pArchivoTexto, "%d, %s, %.2f, %.2f %.2f\n", pAlumno->id, pAlumno->nombre, pAlumno->nota1, pAlumno->nota2, pAlumno->notaFinal);
+            fprintf(pArchivoTexto, "%d, %s, %d, %d %d\n", pAlumno->id, pAlumno->nombre, pAlumno->nota1, pAlumno->nota2, pAlumno->notaFinal);
         }
-        printf("El archivo se guardo exitosamente");
+        printf("El archivo se guardo exitosamente \n");
         indice = 1;
     }
     fclose(pArchivoTexto);
@@ -308,23 +297,21 @@ int listarAlumnos (LinkedList* this)
 {
     eAlumno* alumnoAuxiliar;
     int i;
-    int id;
-    char nombre[100];
-    float nota1;
-    float nota2;
-    float notaFinal;
     int indice = -1;
 
-    printf("ID---Nombre---Nota1--Nota2-- NotaFinal\n");
-
-    for(i = 0; i < ll_len(this); i++)
+    if (this != NULL)
     {
-        alumnoAuxiliar = (eAlumno*) ll_get(this, i);
+        printf("ID---Nombre---Nota1--Nota2--NotaFinal\n");
 
-        if(alumnoAuxiliar != NULL)
+        for(i = 0; i < ll_len(this); i++)
         {
-            printf("%d---%s---%.2f--%.2f--%.2f \n", alumnoAuxiliar->id, alumnoAuxiliar->nombre, alumnoAuxiliar->nota1, alumnoAuxiliar->nota2, alumnoAuxiliar->notaFinal);
-            indice = 1;
+            alumnoAuxiliar = (eAlumno*) ll_get(this, i);
+
+            if(alumnoAuxiliar != NULL)
+            {
+                printf("%d---%s---%d--%d--%d \n", alumnoAuxiliar->id, alumnoAuxiliar->nombre, alumnoAuxiliar->nota1, alumnoAuxiliar->nota2, alumnoAuxiliar->notaFinal);
+                indice = 1;
+            }
         }
     }
     return indice;
@@ -332,11 +319,32 @@ int listarAlumnos (LinkedList* this)
 
 /// PROMEDIO ///
 
-float promedio (float nota1, float nota2)
+void calcularNotasAlumnos(LinkedList* this)
 {
-    float notaFinal;
+    int i;
 
-    notaFinal = (nota1 + nota2) / 2;
+    for(i = 0; i < ll_len(this); i++)
+    {
+        calcularNotaFinal((eAlumno*) ll_get(this, i));
+    }
+    printf("Notas calculadas correctamente \n");
+}
 
-    return notaFinal;
+void calcularNotaFinal(eAlumno* elemento)
+{
+    int numero = (elemento->nota1 + elemento->nota2) / 2;
+
+    setNotaFinal(elemento,numero);
+}
+
+int filtrarPromedio(void* elemento, int aux)
+{
+    eAlumno* alumnoAux = elemento;
+    int retorno = 0;
+
+    if(alumnoAux->notaFinal > aux)
+    {
+        retorno = 1;
+    }
+    return retorno;
 }

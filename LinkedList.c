@@ -575,3 +575,19 @@ LinkedList* ll_filter(LinkedList* this, int (*pFunc)(void*))
     return this2;
 }
 
+int ll_map(LinkedList* this, void (*pFunc)(void*))
+{
+    int indice = -1;
+    void* pElement = NULL;
+    int i;
+    if(this != NULL && pFunc != NULL)
+    {
+        for(i=0; i<ll_len(this); i++)
+        {
+            pElement = ll_get(this, i);
+            pFunc(pElement);
+            indice = 0;
+        }
+    }
+    return indice;
+}
